@@ -1,1 +1,5 @@
 name = Notification Bar
+description = Displays custom messages created by users in horizontal bars on top of the page.
+package = Other
+core = 7.x
+configure = notifications/notification_bar
