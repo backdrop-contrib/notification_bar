@@ -16,7 +16,6 @@ function notification_bar_admin_settings_form() {
     '#title' => t('Message'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-    '#weight' => 0,
   );
   $form['message']['notification_bar_message_text_left'] = array(
     '#type' => 'textarea',
@@ -38,7 +37,6 @@ function notification_bar_admin_settings_form() {
     '#description' => 'Call to Action',
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-    '#weight' => 0,
   );
   $form['message']['cta']['notification_bar_message_cta_text'] = array(
     '#type' => 'textfield',
@@ -51,30 +49,47 @@ function notification_bar_admin_settings_form() {
     '#default_value' => variable_get('notification_bar_message_cta_url', ''),
   );
 
-  $form['visibility']['path'] = array(
+  $form['visibility'] = array(
     '#type' => 'fieldset',
     '#title' => t('Notification Visibility'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-    '#group' => 'visibility',
-    '#weight' => 0,
   );
   $options = array(
     BLOCK_VISIBILITY_NOTLISTED => t('All pages except those listed'),
     BLOCK_VISIBILITY_LISTED => t('Only the listed pages'),
   );
   $description = t("Specify pages by using their paths. Enter one path per line. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page.", array('%blog' => 'blog', '%blog-wildcard' => 'blog/*', '%front' => '<front>'));
-  $form['visibility']['path']['notification_bar_page_visibility'] = array(
+  $form['visibility']['notification_bar_page_visibility'] = array(
     '#type' => 'radios',
     '#title' => t('Show notification on specific pages'),
     '#options' => $options,
     '#default_value' => variable_get('notification_bar_page_visibility', BLOCK_VISIBILITY_NOTLISTED),
   );
-  $form['visibility']['path']['notification_bar_page_custom'] = array(
+  $form['visibility']['notification_bar_page_custom'] = array(
     '#type' => 'textarea',
     '#title' => '<span class="element-invisible">' . t('Pages') . '</span>',
     '#default_value' => variable_get('notification_bar_page_custom', ''),
     '#description' => $description,
+  );
+
+  $form['settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $form['settings']['notification_bar_settings_css'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Load default CSS'),
+    '#default_value' => variable_get('notification_bar_settings_css', 1),
+    '#description' => t("Uncheck the box, If you don't want to use module's default CSS.")
+  );
+  $form['settings']['notification_bar_settings_js'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Load default JS'),
+    '#default_value' => variable_get('notification_bar_settings_js', 1),
+    '#description' => t("Uncheck the box, If you don't want to use Javascript way to align the notification at the top of the page.")
   );
 
   return system_settings_form($form);

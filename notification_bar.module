@@ -28,23 +28,14 @@ function notification_bar_permission() {
  */
 function notification_bar_menu() {
   $items = array();
-  $items['notifications/notification_bar'] = array(
-    'title'             => 'notification bar',
+  $items['admin/config/content/notifications'] = array(
+    'title'             => 'Notification bar',
     'description'       => 'notification bar module settings',
     'page callback'     => 'drupal_get_form',
     'page arguments'    => array('notification_bar_admin_settings_form'),
     'access callback'   => 'user_access',
     'access arguments'  => array('administer notification bar'),
     'file'              => 'notification_bar.admin.inc',
-  );
-  $items['notifications/notification_bar/settings'] = array(
-    'title'             => 'notification bar settings',
-    'description'       => 'notification bar module settings',
-    'page callback'     => 'drupal_get_form',
-    'page arguments'    => array('notification_bar_settings_config_form'),
-    'access callback'   => 'user_access',
-    'access arguments'  => array('administer notification bar settings'),
-    'file'              => 'notification_bar_settings.admin.inc',
   );
   return $items;
 }
