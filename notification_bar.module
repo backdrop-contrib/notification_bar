@@ -45,12 +45,12 @@ function notification_bar_menu() {
  */
 function notification_bar_page_build(&$page) {
   $load_js = variable_get('notification_bar_settings_js', 1);
-  if($load_js){
+  if ($load_js) {
     $notification_bar_markup = notification_bar_message_output();
-    if(!empty($notification_bar_markup)) {
+    if (!empty($notification_bar_markup)) {
       // Add module JS and CSS.
       $load_css = variable_get('notification_bar_settings_css', 1);
-      if($load_css){
+      if ($load_css) {
         drupal_add_css(drupal_get_path('module', 'notification_bar') . '/notification_bar.css');
       }
       drupal_add_js(drupal_get_path('module', 'notification_bar') . '/notification_bar.js');
@@ -70,7 +70,7 @@ function notification_bar_page_build(&$page) {
  */
 function notification_bar_page_alter(&$page) {
   $load_js = variable_get('notification_bar_settings_js', 1);
-  if(!$load_js){
+  if (!$load_js) {
     $page['#post_render'][] = 'notification_bar_postrender_callback';
   }
 }
@@ -131,7 +131,7 @@ function notification_bar_message_output() {
     'cta_text' => $notification_cta_text,
     'cta_url' => $notification_cta_url,
   );
-  if(!empty($notification_message)) {
+  if (!empty($notification_message)) {
     $pages = variable_get('notification_bar_page_custom', '');
     $page_visibility = variable_get('notification_bar_page_visibility', BLOCK_VISIBILITY_NOTLISTED);
     $path = url(current_path());
