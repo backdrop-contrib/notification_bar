@@ -143,7 +143,7 @@ function notification_bar_message_output() {
   if(!empty($notification_message)) {
     $pages = variable_get('notification_bar_page_custom', '');
     $page_visibility = variable_get('notification_bar_page_visibility', BLOCK_VISIBILITY_NOTLISTED);
-    $path = drupal_strtolower(drupal_get_path_alias($_GET['q']));
+    $path = url(current_path());
     // Compare the lowercase internal and lowercase path alias (if any).
     $page_match = drupal_match_path($path, $pages);
     if ($path != $_GET['q']) {
