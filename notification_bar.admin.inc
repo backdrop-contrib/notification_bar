@@ -9,7 +9,9 @@
  * Implements hook_admin_settings().
  */
 function notification_bar_admin_settings_form() {
+  $config = config('notification_bar.settings');
   $form = array();
+  $form['#config'] = 'notification_bar.settings';
 
   $form['message'] = array(
     '#type' => 'fieldset',
@@ -20,10 +22,10 @@ function notification_bar_admin_settings_form() {
   $form['message']['notification_bar_message_text_left'] = array(
     '#type' => 'textarea',
     '#title' => t('Left Section'),
-    '#default_value' => variable_get('notification_bar_message_text_left', ''),
+    '#default_value' => $config->get('notification_bar_message_text_left'),
     '#weight' => -2,
   );
-  $notification_bar_message_array = variable_get('notification_bar_message');
+  $notification_bar_message_array = $config->get('notification_bar_message');
   $form['message']['notification_bar_message'] = array(
     '#type' => 'text_format',
     '#title' => t('Message'),
@@ -41,12 +43,12 @@ function notification_bar_admin_settings_form() {
   $form['message']['cta']['notification_bar_message_cta_text'] = array(
     '#type' => 'textfield',
     '#title' => t('Label'),
-    '#default_value' => variable_get('notification_bar_message_cta_text', ''),
+    '#default_value' => $config->get('notification_bar_message_cta_text'),
   );
   $form['message']['cta']['notification_bar_message_cta_url'] = array(
     '#type' => 'textfield',
     '#title' => t('URL'),
-    '#default_value' => variable_get('notification_bar_message_cta_url', ''),
+    '#default_value' => $config->get('notification_bar_message_cta_url'),
   );
 
   $form['visibility'] = array(
@@ -64,12 +66,12 @@ function notification_bar_admin_settings_form() {
     '#type' => 'radios',
     '#title' => t('Show notification on specific pages'),
     '#options' => $options,
-    '#default_value' => variable_get('notification_bar_page_visibility', BLOCK_VISIBILITY_NOTLISTED),
+    '#default_value' => $config->get('notification_bar_page_visibility'),
   );
   $form['visibility']['notification_bar_page_custom'] = array(
     '#type' => 'textarea',
     '#title' => '<span class="element-invisible">' . t('Pages') . '</span>',
-    '#default_value' => variable_get('notification_bar_page_custom', ''),
+    '#default_value' => $config->get('notification_bar_page_custom'),
     '#description' => $description,
   );
 
@@ -82,14 +84,14 @@ function notification_bar_admin_settings_form() {
   $form['settings']['notification_bar_settings_css'] = array(
     '#type' => 'checkbox',
     '#title' => t('Load default CSS'),
-    '#default_value' => variable_get('notification_bar_settings_css', 1),
-    '#description' => t("Uncheck the box, If you don't want to use module's default CSS.")
+    '#default_value' => $config->get('notification_bar_settings_css'),
+    '#description' => t("Uncheck the box, If you don't want to use module's default CSS."),
   );
   $form['settings']['notification_bar_settings_js'] = array(
     '#type' => 'checkbox',
     '#title' => t('Load default JS'),
-    '#default_value' => variable_get('notification_bar_settings_js', 1),
-    '#description' => t("Uncheck the box, If you don't want to use Javascript way to align the notification at the top of the page.")
+    '#default_value' => $config->get('notification_bar_settings_js'),
+    '#description' => t("Uncheck the box, If you don't want to use Javascript way to align the notification at the top of the page."),
   );
 
   return system_settings_form($form);

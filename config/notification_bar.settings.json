@@ -1,0 +1,11 @@
+{
+    "_config_name": "notification_bar.settings",
+    "notification_bar_message_text_left": "",
+    "notification_bar_message": "",
+    "notification_bar_message_cta_text": "",
+    "notification_bar_message_cta_url": "",
+    "notification_bar_page_visibility": "BLOCK_VISIBILITY_NOTLISTED",
+    "notification_bar_page_custom": "",
+    "notification_bar_settings_css": "1",
+    "notification_bar_settings_js": "1"
+}

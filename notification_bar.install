@@ -12,3 +12,35 @@ function notification_bar_uninstall() {
   $query = "DELETE FROM {variable} WHERE name LIKE 'notification_bar_%'";
   db_query($query);
 }
+
+/**
+ * Migrate notification_bar variables to config.
+ */
+function notification_bar_update_1000() {
+  $config = config('notification_bar.settings');
+  $config->set('notification_bar_message_text_left', update_variable_get('notification_bar_message_text_left', ''));
+  $config->set('notification_bar_message', update_variable_get('notification_bar_message', ''));
+  $config->set('notification_bar_message_cta_text', update_variable_get('notification_bar_message_cta_text', ''));
+  $config->set('notification_bar_message_cta_url', update_variable_get('notification_bar_message_cta_url', ''));
+  $config->set('notification_bar_page_visibility', update_variable_get('notification_bar_page_visibility', 'BLOCK_VISIBILITY_NOTLISTED'));
+  $config->set('notification_bar_page_custom', update_variable_get('notification_bar_page_custom', ''));
+  $config->set('notification_bar_settings_css', update_variable_get('notification_bar_settings_css', '1'));
+  $config->set('notification_bar_settings_js', update_variable_get('notification_bar_settings_js', '1'));
+  $config->save();
+
+  update_variable_del('notification_bar_message_text_left');
+  update_variable_del('notification_bar_message');
+  update_variable_del('notification_bar_message_cta_text');
+  update_variable_del('notification_bar_message_cta_url');
+  update_variable_del('notification_bar_page_visibility');
+  update_variable_del('notification_bar_page_custom');
+  update_variable_del('notification_bar_settings_css');
+  update_variable_del('notification_bar_settings_js');
+}
+
+/**
+ * Implements hook_install().
+ */
+function notification_bar_install() {
+  // Dynamically generated variable data was detected.
+}
