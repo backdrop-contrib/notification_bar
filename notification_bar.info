@@ -1,6 +1,6 @@
 name = Notification Bar
-description = Displays custom messages created by users in horizontal bars on top of the page.
+description = Display a custom message in a horizontal bar at the top of the page.
 package = Other
 backdrop = 1.x
 type = module
-configure = notifications/notification_bar
+configure = admin/config/content/notifications
