@@ -124,9 +124,11 @@ function notification_bar_message_output() {
       //Didn't match. Don't show the notification bar on this page.
       return;
     }
-
+    $container_setting = $config->get('settings_container');
+    $container_class = ($container_setting) ? 'container' : 'container-fluid';
     $vars = array(
       'type' => "status",
+      'container_class' => $container_class,
       'messages_array' => array($notification_message_array),
     );
     $messages = theme('notification_bar_messages', $vars);
@@ -151,6 +153,7 @@ function theme_notification_bar_messages($variables) {
     foreach ($variables['messages_array'] as $message) {
       $vars = array(
         'type' => $variables['type'],
+        'container_class' => $variables['container_class'],
         'message' => $message,
       );
       $output .= theme('notification_bar_message', array('vars' => $vars));

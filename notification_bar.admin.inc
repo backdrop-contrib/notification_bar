@@ -65,12 +65,16 @@ function notification_bar_admin_settings_form($form, $form_state) {
     '#default_value' => $config->get('page_custom'),
     '#description' => $description,
   );
-
   $form['settings']['settings_css'] = array(
     '#type' => 'checkbox',
     '#title' => t('Load default CSS'),
     '#default_value' => $config->get('settings_css'),
-    '#description' => t("Uncheck if you don't want to use module's default CSS."),
+    '#description' => t("Uncheck if you don't want to use the module's default CSS."),
+  );
+  $form['settings']['settings_container'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Add a container class to the notification bar'),
+    '#default_value' => $config->get('settings_container'),
   );
 
   // Add a submit button
@@ -95,6 +99,7 @@ function notification_bar_admin_settings_form_submit($form, &$form_state) {
   $config->set('page_visibility', $form_state['values']['page_visibility']);
   $config->set('page_custom', $form_state['values']['page_custom']);
   $config->set('settings_css', $form_state['values']['settings_css']);
+  $config->set('settings_container', $form_state['values']['settings_container']);
   $config->save();
 
   backdrop_set_message(t('The configuration options have been saved.'));

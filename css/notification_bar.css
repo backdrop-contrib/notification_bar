@@ -24,10 +24,9 @@
   justify-content: center;
   align-items: center;
   margin: 0;
-  padding: 0;
+  padding: 0 .9375rem;
   color: var(--notification-message-text-color);
   width: max-content;
-  max-width: 100%;
   line-height: 1;
 }
 .notification-bar-message div {

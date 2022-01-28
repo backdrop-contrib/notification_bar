@@ -1,4 +1,4 @@
-<div class="clearfix notification-bar-message notification-bar-<?php print $vars['type']; ?>">
+<div class="clearfix notification-bar-message notification-bar-<?php print $vars['type']; ?> <?php print $vars['container_class']; ?>">
   <?php if (!empty($vars['message']['message_label'])): ?>
     <div class="message-label">
       <?php print $vars['message']['message_label']; ?>
