@@ -31,6 +31,7 @@ function notification_bar_admin_settings_form($form, $form_state) {
     '#title' => t('Message'),
     '#default_value' => isset($notification_bar_message_array['value']) ? $notification_bar_message_array['value'] : '',
     '#format' => isset($notification_bar_message_array['format']) ? $notification_bar_message_array['format'] : 'filtered_html',
+    '#editor_uploads' => TRUE,
     '#weight' => -1,
   );
   $form['message']['cta'] = array(
@@ -101,6 +102,19 @@ function notification_bar_admin_settings_form_submit($form, &$form_state) {
   $config->set('settings_css', $form_state['values']['settings_css']);
   $config->set('settings_container', $form_state['values']['settings_container']);
   $config->save();
+
+  // Save each file as permanent, preventing it from being deleted.
+  // See https://github.com/backdrop/backdrop-issues/issues/2137.
+  if (isset($form_state['values']['message'])) {
+    $fids = filter_parse_file_fids($form_state['values']['message']['value']);
+    $files = file_load_multiple($fids);
+    foreach ($files as $fid => $file) {
+      if ($file && $file->status !== FILE_STATUS_PERMANENT) {
+        // This makes the file "self-referencing", so it will never be deleted.
+        file_usage_add($file, 'file', 'file', $file->fid);
+      }
+    }
+  }
 
   backdrop_set_message(t('The configuration options have been saved.'));
 }
