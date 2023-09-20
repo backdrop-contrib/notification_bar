@@ -9,6 +9,17 @@ Backdrop.notification_bar = Backdrop.notification_bar || {};
 
   $(document).ready(function () {
     Backdrop.notification_bar.initialize();
+
+    var wasScrolled = false;
+    var scrollThreshold = 1;
+
+    $(window).on('scroll', function () {
+      if ($(this).scrollTop() > scrollThreshold && !wasScrolled) {
+        $('#notification-bar-messages').slideUp();
+        wasScrolled = true;
+      }
+    });
+
   });
 
 })(jQuery);
